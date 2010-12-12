@@ -1,0 +1,269 @@
+                          ~ Diatom Build Framework ~
+                                     v1.2          
+
+---                 Copyright (c) 2006-2011, Blunt Jackson                   ---
+
+Welcome. This is an effort to take make to the limits, support multiple projects
+of various sizes across, potentially, multi-language builds. We don't claim that
+it does any of this particularly well, or that it will be useful for you, but it
+gets the job done for some applications and projects. This system is free to use
+and modify without restriction. It may also be redistributed without restriction
+whether changed or not. Hell, if anyone thinks it's that useful, I'll be amazed.
+
+--------------------------------------------------------------------------------
+
+                                DOCUMENTATION
+
+--------------------------------------------------------------------------------
+
++-------------------------------------+
+|  0. ToDo List                       |
++-------------------------------------+
+
+    ( ) Better dependency tracking
+    ( ) Better structure for unit tests
+    ( ) Infrastructure for third party dependency resolving
+    ( ) Multi-platform control over linking methologies
+    ( ) How about more languages???
+
++-------------------------------------+
+|  1. Directory Structures            |
++-------------------------------------+
+      
+    Dir Summary:
+
+    <root_dir>                  the top level directory of the project.
+    <root_dir>/src              contains all source code
+    <root_dir>/src/<Family>     clusters modules
+    <root_dir>/src/<Family>/<Module> the basic compilation unit.  
+    <root_dir>/bin              contains executable applications & scripts
+    <root_dir>/bin/<Project>    executable applications clustered by project
+    <root_dir>/lib              contains compiled libraries, optionally
+                                organized by namespace
+    <root_dir>/include          contains header files, org's by project or
+                                namespace
+    <root_dir>/build/<Module>   build-space for modules.
+    <root_dir>/docs             for any additional documentation
+
+    <install_base>              the root directory for installation.
+
+    Concept Summary:
+
+    Family:  a basic aggregation of related modules. Can be useful
+             for defining single projects, or for keeping levels
+             of dependency clear in large applications.
+
+    Module:  the basic build unit. One directory full of source code
+             is one module. Modules result in libraries or applications.
+
+    Project: Possibly Orthogonal to Family, a project may require a
+             a set of modules from multiple families (or it may be one
+             family). Projects are useful for designing distinct
+             distributions when multiple applications may arise from
+             the same build environment.
+
+
++-------------------------------------+
+|  2. Build Conventions               |
++-------------------------------------+
+
+  a. All source files are aggregated into 'Families' and 'Modules'
+     organized in the following directory hierarchy:
+
+       <root_dir>/<src_dir>/<Family>/<Module>
+ 
+  b. The basic unit of compilation is a Module, which represents one
+     library, application, or cluster of applications
+
+  c. Families are used to aggregate similar types of modules,
+     house large projects, and keep the src_dir from becoming too
+     cluttered.
+
+  d. Header files are built into the following structure:
+  
+     <root_dir>/include
+  
+     Unless you override the INCLUDE_DIR variable in local makefiles,
+     header files from other modules should be referenced like so in source:
+  
+     #include "myheader.h"
+
+     Optionally, you may define a namespace which will place the header files
+     one directory down, e.g.:
+
+     NAMESPACE := myproj
+     <root_dir>/include/myproj
+     #include "myproj/myheader.h"
+  
+  e. All modules are built in the following build space:
+  
+     <root_dir>/build/<Module>
+  
+     This space is considered private to each module.
+  
+  f. Complete libraries are "published" into the following:
+  
+     <root_dir>/lib/
+  
+  g. Compiled applications are "published" into either of the following:
+  
+     <root_dir>/bin/
+     <root_dir>/bin/<Project>
+  
+     The former is the default behavior;
+     The latter may be obtained by defining PROJECT in an 
+         application level Makefile.
+  
+  h. Published applications and scripts will be installed (via make install)
+     into either of the following:
+  
+       <install_base>
+       <install_base>/<Project>
+  
+
++-------------------------------------+
+|  3. Configuring Modules             |
++-------------------------------------+
+  
+  a. Libraries
+  
+     In the Module Makefile, define:
+  
+         COMPILE_MODE = lib
+  
+     The compiled results will be a .so and a .a library file in the
+     archive directory ( <root_dir>/lib ) for C or C++ code, and a
+     jar file for Java code in the same location.
+  
+     If you only require a .so file, define: ONLY_SHARED  = 1
+     If you only require a .a file, define:  ONLY_ARCHIVE = 1
+  
+     If the library publishes header files, define:
+  
+         PUBLIC_HEADERS = first_header.h second_header.h etc.
+  
+     You do not have to include header files that are not intended for
+     use by consumers of the library.
+  
+     To define the source code that builds the library, define:
+  
+         OBJECT_SOURCES = first_source.cpp second_source.cpp etc.
+  
+     If you are using lex/yacc facilities, the .l and .y files should
+     have the same base filename, and you should define:
+       
+         LYOBJ = my_parser
+ 
+     In this example, your source would be my_parser.l & my_parser.y
+
+     To define unit-tests, define:
+  
+         TEST_SOURCES = test-app-one.cpp test-app-two.cpp
+  
+     Each test source should include a standard 'main' and will be used
+     to create a separate testing application. Each test application will
+     be executed after it is built. If the test application fails,
+     compilation will said to fail. If TEST_SOURCES are defined, then
+     a link line should be provided as well:
+  
+         LOCAL_LIBS = -lmodule -lother
+         THIRD_PARTY_LIBS = -lpthread -lz
+  
+     Note that THIRD_PARTY_LIBS is optional, only to be used if needed.
+     LOCAL_LIBS should, minimally, include the archive that is built
+     as a target of this module. Unit tests assume static linking.
+
+       
+  
+  b. Applications
+  
+     In the Module Makefile, define:
+  
+         COMPILE_MODE = app
+  
+     The compiled application will be published to <root_dir>/bin
+     *unless* PROJECT is defined, eg:
+  
+         PROJECT = test-app
+  
+     ... in which case the final app(s) will be in <root_dir>/bin/test-app
+     Projects may contain multiple levels of directories.
+ 
+     An Application Module may include scripts that will be copied
+     to the target bin directory and/or installed to the destination
+     location. Each script should be included in the SCRIPTS list:
+  
+         SCRIPTS = scan-for-files.pl matrix-stuff.php
+  
+     An Application Module may build one or more applications. Each
+     application should have a source .cpp or .c file defined:
+  
+         APP_SOURCES = app_one.cpp app_two.cpp
+  
+     Each APP_SOURCE file should include a standard main. This example
+     would result in two applications: 'app_one' and 'app_two' 
+  
+     An Application Module may additionally have local support files
+     that are included when compiling the application. Define these
+     like so:
+  
+         OBJECT_SOURCES = common_one.cpp common_two.cpp
+  
+     The object file resulting from support sources will be included
+     when building each application in the module.
+  
+     Applications that are linked against libraries should include the
+     link line definitions, as described for unit tests, eg:
+  
+         LOCAL_LIBS = -lmodule_one -lmodule_two
+         THIRD_PARTY_LIBS = -lmysql-client -lz
+  
+     If you want to specify extra directories to search for third
+     party libraries, add this (eg):
+  
+         EXTRA_LINK_DIRS  = /home/user/third-party/package/lib
+  
+     Applications are statically linked by default. If you want dynamic
+     linkage, add:
+  
+         LINK_DYNAMIC = 1
+  
+
+
+  c. All Makefiles, additional notes
+  
+      i. Flags. All Module Makefiles may additionally specify flags 
+         controlling compilation. These will *override* those in the
+         common.make, so if used, should be comprehensive.
+  
+         COMP_FLAGS = common compilation flags used regardless of
+                      language being compiled. (Note: the following
+                      may be set in Module Makefiles to *add* to the
+                      standard comp flags: ADDTL_FLAGS
+  
+         CPP_FLAGS  = flags specific to C++ compilation.
+  
+         C_FLAGS    = flags specific to C compilation.
+  
+         LINK_FLAGS = flags to the linker
+  
+         D_FLAGS    = flags to the preprocessor -- added to defaults in
+                      common.make, ie., not a replacement.
+  
+     ii. Include. Each Module Makefile must include (generally as the last
+         thing in the Makefile) common.make, like so:
+  
+           include ../../common.make
+  
+    iii. Module Makefiles may, if necessary, define additional custom
+         targets. Generally, this should be done *after* the include,
+         particularly if this target will make use of any of the
+         structures defined in common.make
+  
+     iv. The target 'post' may be defined in Module Makefiles to provide
+         additional post compilation functionality. 'post' will be
+         undertaken after all compilation and linking is finished.
+  
+--------------------------------------------------------------------------------
+All programmers are playwrights and all computers are lousy actors.  --Anonymous
+--------------------------------------------------------------------------------

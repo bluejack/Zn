@@ -1,0 +1,41 @@
+
+zinc
+
+ - a general purpose language used to experiment with language building
+   compiler construction, etc.
+
+ - intended to include an interactive shell with integrated language
+   interpretter, a runtime interpretter, and a compiler.
+
+Usage:
+
+$ zinc            <-- Shell Mode
+$ zinc file.zn    <-- Interpret and execute file.zn
+$ zinc -c file.zn <-- Compile file.zn to application 'file'
+
+Status:
+
+Shell:
+ > primitive, but functional; 
+   currently using ncurses, but I think I want to use termcap instead.
+
+ > rudimentary handling of command execution
+
+   TODO: 
+     ( ) User identification & permissions management
+     ( ) Detach from shell command
+     ( ) Input to child processes
+     ( ) Chaining programs
+     ( ) Redirecting stdin/stdout
+     ( ) Command history
+     ( ) Wildcard expansion
+     ( ) Connect to Zinc interpretter
+
+Interpretter:
+
+ NONE
+
+Compiler:
+
+ NONE
+
