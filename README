@@ -32,11 +32,27 @@ Shell:
      ( ) Connect to Zinc interpretter
      ( ) Left/Right arrows, ctrl-a, ctrl-e
 
-Runtime::
+Runtime:
 
- NONE
+ > A glimmer in our eye
+
+     ( ) Basic state management
+     ( ) Symbol table, first draft
+     ( ) Connect to shell display
+     ( ) Establish standalone mode for file interpretation
+
+ > Also a glimmer in our eye
 
 Compiler:
 
- NONE
+     ( ) Basic parser infrastructure
+         [ write ]
+     ( ) Test linking a second parser
+     ( ) Connect to runtime
+     ( ) Hello world -> C
+
+--------------------------------------------------------------------------------
+: Plans are only good intentions unless they immediately degenerate into hard  :
+: work.                                                      -- Peter Drucker  :
+--------------------------------------------------------------------------------
 
