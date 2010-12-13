@@ -30,8 +30,9 @@ Shell:
      ( ) Command history
      ( ) Wildcard expansion
      ( ) Connect to Zinc interpretter
+     ( ) Left/Right arrows, ctrl-a, ctrl-e
 
-Interpretter:
+Runtime::
 
  NONE
 

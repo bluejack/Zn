@@ -1,7 +1,7 @@
 
-NAMESPACE = zinc
-
 COMPILE_MODE = lib
+
+ONLY_ARCHIVE = 1
 
 REQUIRE_C = 1
 
@@ -22,9 +22,5 @@ OBJECT_SOURCES =           \
 PUBLIC_HEADERS =           \
 	shell.h            \
 	$(NULL)
-
-#DEPENDENCIES = \
-#	-lprimitives \
-#	$(NULL)
 
 include ../../../common.make

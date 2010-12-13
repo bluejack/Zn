@@ -1,16 +1,16 @@
 
-ONLY_ARCHIVE = 1
-
 COMPILE_MODE = lib
+
+ONLY_ARCHIVE = 1
 
 REQUIRE_C = 1
 
 OBJECT_SOURCES =           \
-	linked_list.c      \
+	runtime.c          \
 	$(NULL)
 
-PUBLIC_HEADERS =      \
-	linked_list.h \
+PUBLIC_HEADERS =           \
+	runtime.h          \
 	$(NULL)
 
 include ../../../common.make

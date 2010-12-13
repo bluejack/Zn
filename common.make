@@ -21,6 +21,7 @@
 NAMESPACE := zinc
 C_STD     := gnu99
 # MULTIPROJECT := 1 not for zinc!
+APPLE_LINK := -flat_namespace
 
 # ------------------------------------ #
 #  (1) Supported Platforms.            #
@@ -125,15 +126,23 @@ HEADER_TARG := $(PUBLIC_HEADERS:%.h=$(EXPORT_DIR)/%.h)
 # ------------------------------------ #
 
 ifeq ($(COMPILE_MODE), lib)
+    ifneq ($(ONLY_SHARED), 1)
 	AR_TARG   := $(if $(strip $(OBJECTS)),lib$(MODULE).a)
+    endif
+    ifneq ($(ONLY_ARCHIVE), 1)
 	SO_TARG   := $(if $(strip $(OBJECTS)),lib$(MODULE).so)
-	JAR_TARG  := $(if $(strip $(JCLASSES)),$(MODULE).jar)
-	UNITTEST  := $(MODULE)-test
-	ifeq ($(PLATFORM),$(APPLE))
-    	    LIB_FLAGS := -shared -undefined suppress -flat_namespace
-	else 
-    	    LIB_FLAGS := -shared
-	endif	    
+    endif
+    JAR_TARG  := $(if $(strip $(JCLASSES)),$(MODULE).jar)
+    UNITTEST  := $(MODULE)-test
+    ifeq ($(PLATFORM),$(APPLE))
+        LIB_FLAGS := -shared -undefined suppress $(APPLE_LINK)
+    else 
+        LIB_FLAGS := -shared
+    endif	    
+endif
+
+ifeq ($(PLATFORM),$(APPLE))
+    LINK_FLAGS := $(APPLE_LINK)
 endif
 
 ifdef AR_TARG
