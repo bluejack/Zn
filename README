@@ -1,11 +1,34 @@
+                           ~ zinc language compiler ~
+                                     v0.02          
 
-zinc
+---                 Copyright (c) 2006-2011, Blunt Jackson                   ---
 
- - a general purpose language used to experiment with language building
-   compiler construction, etc.
+Welcome. The zinc project is a personal effort at language design and a learning
+experience in compiler construction and extensible runtime development. The zinc
+language is intended to apply some of the efficiencies erlang brings to parallel
+processing to a pragmatic imperative language that offers first-class objects as
+well as some new constructs designed to encourage clean application design while
+solving the every-day problems of the real world. I call this development philo-
+sophy "Task Oriented Application Design," or TOAD.
 
- - intended to include an interactive shell with integrated language
-   interpretter, a runtime interpretter, and a compiler.
+Deeper discussion of the theory and practice of TOAD is reserved for such a time
+as this language demonstrates any value in the approach.
+
+--------------------------------------------------------------------------------
+
+                                    STATUS
+
+--------------------------------------------------------------------------------
+
+Overall:  Not Yet Functional
+
+Shell:    Primitive command execution in place.
+Runtime:  Nuthin
+Compiler: Nuthin
+
+Current:  Compiler->Basic Parser Scaffolding
+
+--------------------------------------------------------------------------------
 
 Usage:
 
@@ -13,47 +36,48 @@ $ zinc            <-- Shell Mode
 $ zinc file.zn    <-- Interpret and execute file.zn
 $ zinc -c file.zn <-- Compile file.zn to application 'file'
 
-Status:
+--------------------------------------------------------------------------------
 
 Shell:
- > primitive, but functional; 
-   currently using ncurses, but I think I want to use termcap instead.
 
- > rudimentary handling of command execution
-
-   TODO: 
-     ( ) User identification & permissions management
-     ( ) Detach from shell command
-     ( ) Input to child processes
-     ( ) Chaining programs
-     ( ) Redirecting stdin/stdout
-     ( ) Command history
-     ( ) Wildcard expansion
-     ( ) Connect to Zinc interpretter
-     ( ) Left/Right arrows, ctrl-a, ctrl-e
+     ( ) [Dec 10] Connect to Zinc interpretter
+     ( ) [Dec 10] Detach from shell command
+     ( ) [Dec 10] Command history
+     ( ) [Dec 10] Research Termios/Termcap alternatives to ncurses
+     ( ) [Dec 10] Left/Right arrows, ctrl-a, ctrl-e
+     ( ) [Jan 11] Input to child processes
+     ( ) [Jan 11] Wildcard expansion
+     ( ) [Feb 11] User identification & permissions management
+     ( ) [Feb 11] Chaining programs
+     ( ) [Feb 11] Redirecting stdin/stdout
 
 Runtime:
 
- > A glimmer in our eye
-
-     ( ) Basic state management
-     (.) Symbol table, first draft
-         [ ] Hash Table Primitive available!
-     ( ) Connect to shell display
-     ( ) Establish standalone mode for file interpretation
-
- > Also a glimmer in our eye
+     ( ) [Dec 10] Basic state management
+     (.) [Dec 10] Symbol table, first draft
+         [x] Hash Table Primitive available!
+     ( ) [Dec 10] Connect to shell display
+     ( ) [Jan 11] Establish standalone mode for file interpretation
 
 Compiler:
 
-     ( ) Basic parser infrastructure
-         [ write ]
-     ( ) Test linking a second parser
-     ( ) Connect to runtime
-     ( ) Hello world -> C
+>>>  ( ) [Dec 10] Basic parser scaffolding
+     ( ) [Dec 10] Test linking a second parser
+     ( ) [Dec 10] Connect to runtime
+     ( ) [Feb 11] Hello world -> C
 
 --------------------------------------------------------------------------------
 : Plans are only good intentions unless they immediately degenerate into hard  :
 : work.                                                      -- Peter Drucker  :
 --------------------------------------------------------------------------------
 
+Completed
+
+    (X) [Dec 10] Shell parser scaffolding
+    (X) [Dec 10] Adopt & pass on environment
+    (X) [Dec 10] Multiple commands per line
+    (X) [Dec 10] Assign environment variables (overwrite, append)
+    (X) [Dec 10] Experiment with ncurses display
+    (X) [Dec 10] Correct command execution w/ stdout pass through
+    (X) [Dec 10] Scrolling window
+    (X) [Dec 10] Basic unit test support in framework
