@@ -15,12 +15,12 @@
 #include <stdbool.h>
 
 #include "command.h"
-#include "zinc/linked_list.h"
+#include "zinc/zn_list.h"
 
 /*\
  * Opaque Type
 \*/
-typedef linked_list command_seq;
+typedef zn_list command_seq;
 
 command_seq* command_seq_new(void);
 

@@ -9,7 +9,7 @@ void _cmd_destroyer(void*);
 
 command_seq* command_seq_new() 
 {
-  command_seq* seq = ll_new();
+  command_seq* seq = list_new(&_cmd_destroyer);
   return seq;
 }
 
@@ -21,29 +21,29 @@ void _cmd_destroyer(void* obj) {
 void command_seq_destroy(command_seq *seq)
 {
   assert(seq != NULL);
-  ll_destroy(seq, &_cmd_destroyer);
+  list_destroy(seq);
 }
 
 void command_seq_clear(command_seq *seq)
 {
   assert(seq != NULL);
-  ll_empty(seq, &_cmd_destroyer);
+  list_empty(seq);
 }
 
 void command_seq_reset(command_seq *seq) {
   assert(seq != NULL);
-  ll_reset(seq);
+  list_reset(seq);
 }
 
 bool command_seq_has_next(command_seq *seq) {
   assert(seq != NULL);
-  return ll_has_next(seq);
+  return list_has_next(seq);
 }
 
 void command_seq_add(command_seq *seq, command *cmd) {
   assert(seq != NULL);
   assert(cmd != NULL);
-  ll_add(seq, cmd);
+  list_add(seq, cmd);
 }
 
 /*
@@ -55,7 +55,7 @@ void command_seq_add(command_seq *seq, command *cmd) {
 int command_seq_exec_next(command_seq *seq) {
 
   assert(seq != NULL);
-  command *cmd = (command*)ll_next(seq);
+  command *cmd = (command*)list_next(seq);
   if (cmd == NULL || !command_is_valid(cmd)) return -1;
   
   return command_execute(cmd);

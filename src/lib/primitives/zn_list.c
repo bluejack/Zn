@@ -1,5 +1,5 @@
 
-#include "linked_list.h"
+#include "zn_list.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -14,32 +14,34 @@ struct _ll {
   ll_ctr *first;
   ll_ctr *curr;
   unsigned long size;
+  object_destructor destroy;
 };
 
-linked_list* 
-ll_new(void) 
+zn_list* 
+list_new(object_destructor destructor) 
 {
-  linked_list *ll = malloc(sizeof(linked_list));
-  memset(ll, 0, sizeof(linked_list));
+  zn_list *ll = malloc(sizeof(zn_list));
+  memset(ll, 0, sizeof(zn_list));
+  ll->destroy = destructor;
   return ll;
 }
 
 void 
-ll_destroy(linked_list *ll, ll_destroyer destroy_func)
+list_destroy(zn_list *ll)
 {
   assert(ll != NULL);
-  ll_empty(ll, destroy_func);
+  list_empty(ll);
   free(ll);
 }
 
 void
-ll_empty(linked_list *ll, ll_destroyer destroy_func)
+list_empty(zn_list *ll)
 {
   assert(ll != NULL);
   while (ll->first) {
     ll->curr = ll->first->next;
-    if(destroy_func != NULL) {
-      destroy_func(ll->first->obj);
+    if(ll->destroy != NULL) {
+      ll->destroy(ll->first->obj);
     }
     free(ll->first);
     ll->first = ll->curr;
@@ -47,7 +49,7 @@ ll_empty(linked_list *ll, ll_destroyer destroy_func)
 }
 
 void  
-ll_add(linked_list *ll, void *obj)
+list_add(zn_list *ll, void *obj)
 {
   assert(ll != NULL);
   assert(obj != NULL);
@@ -67,19 +69,19 @@ ll_add(linked_list *ll, void *obj)
 }
 
 void  
-ll_reset(linked_list *ll)
+list_reset(zn_list *ll)
 {
   ll->curr = ll->first;
 }
 
 bool  
-ll_has_next(linked_list *ll)
+list_has_next(zn_list *ll)
 {
   return ll->curr != NULL;
 }
 
 void* 
-ll_next(linked_list *ll)
+list_next(zn_list *ll)
 {
   if (ll->curr == NULL) return NULL;
   void *obj = ll->curr->obj;
@@ -88,15 +90,15 @@ ll_next(linked_list *ll)
 }
 
 void* 
-ll_first(linked_list *ll)
+list_first(zn_list *ll)
 {
-  ll_reset(ll);
+  list_reset(ll);
   if (ll->first == NULL) return NULL;
   return ll->first->obj;
 }
 
 unsigned long 
-ll_size(linked_list *ll)
+list_size(zn_list *ll)
 {
   return ll->size;
 }

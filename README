@@ -37,7 +37,8 @@ Runtime:
  > A glimmer in our eye
 
      ( ) Basic state management
-     ( ) Symbol table, first draft
+     (.) Symbol table, first draft
+         [ ] Hash Table Primitive available!
      ( ) Connect to shell display
      ( ) Establish standalone mode for file interpretation
 
