@@ -5,13 +5,15 @@ ONLY_ARCHIVE = 1
 
 REQUIRE_C = 1
 
-LYOBJ = zinc_grammar
+LYOBJ = zn_parser
 
 OBJECT_SOURCES =           \
-	zn_parser.c        \
+	zn_dispatcher.c    \
+	zn_statement.c     \
 	$(NULL)
 
 PUBLIC_HEADERS =           \
+	zn_dispatcher.h    \
 	zn_parser.h        \
 	$(NULL)
 

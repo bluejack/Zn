@@ -1,37 +1,21 @@
 #ifndef ZINC_PARSER
 #define ZINC_PARSER
-/*
-** parser will take hooks to process complete statements, whether that be 
-** compilation to (or toward) machine code, or whether that be a runtime
-** for immediate execution.
-*/
 
-typedef struct _parser zn_parser;
+#include "zn_statement.h"
+#include "zn_dispatcher.h"
 
 typedef enum {
-  parse_successful = 0,
-  parse_unfinished,
-  parse_syntax_error
+  zn_parse_successful = 0,
+  zn_parse_incomplete,
+  zn_parse_failure,
 } zn_parse_result;
 
 /*
-** Registration function definitions.
+** Given a statement object and a valid dispatcher, this will
+** create a valid statement from the text provided, if possible.
 */
 
-typedef (void)(*write_f)(const char*);
-
-/*
-** Basic methods
-*/
-
-zn_parser *parser_new();
-
-zn_parse_result parse_line(const char* text);
-
-/*
-** Registration methods.
-*/
-void parser_reg_write(write_f);
-
+zn_parse_result 
+parse_line(zn_statement *stmt, zn_dispatcher *dsp, const char* text);
 
 #endif
