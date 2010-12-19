@@ -10,7 +10,7 @@ WORDSTART [A-Za-z_]
 #include <stdio.h>
 void yyerror(char *);
 
-#include "zinc_grammar.tab.h"
+#include "zn_parser.tab.h"
 #define YY_NO_INPUT
 %}
 
@@ -18,7 +18,8 @@ void yyerror(char *);
 
 %%
 write                     return WRITE;
-<--                       return LEFT_PUSH;
+\<--                       return LEFT_PUSH;
+[ \t]*\n                  return EOS;
 \"[^"\n]*["\n]            {
                             yylval.text = strdup(yytext+1);
                             if (yylval.text[yyleng-2] != '"')

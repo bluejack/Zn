@@ -40,7 +40,7 @@ $ zinc -c file.zn <-- Compile file.zn to application 'file'
 
 Shell:
 
-     ( ) [Dec 10] Connect to Zinc interpretter
+     ( ) [Dec 10] Connect to Zinc runtime
      ( ) [Dec 10] Detach from shell command
      ( ) [Dec 10] Command history
      ( ) [Dec 10] Research Termios/Termcap alternatives to ncurses
@@ -52,18 +52,16 @@ Shell:
      ( ) [Feb 11] Redirecting stdin/stdout
 
 Runtime:
-
+          
+     ( ) [Dec 10] Connect to shell display
+     ( ) [Dec 10] Hello World (interactive)
      ( ) [Dec 10] Basic state management
      (.) [Dec 10] Symbol table, first draft
          [x] Hash Table Primitive available!
-     ( ) [Dec 10] Connect to shell display
      ( ) [Jan 11] Establish standalone mode for file interpretation
+     ( ) [Jan 11] Hello World (standalone)
 
 Compiler:
-
->>>  ( ) [Dec 10] Basic parser scaffolding
-     ( ) [Dec 10] Test linking a second parser
-     ( ) [Dec 10] Connect to runtime
      ( ) [Feb 11] Hello world -> C
 
 --------------------------------------------------------------------------------
@@ -73,11 +71,15 @@ Compiler:
 
 Completed
 
-    (X) [Dec 10] Shell parser scaffolding
-    (X) [Dec 10] Adopt & pass on environment
-    (X) [Dec 10] Multiple commands per line
-    (X) [Dec 10] Assign environment variables (overwrite, append)
-    (X) [Dec 10] Experiment with ncurses display
-    (X) [Dec 10] Correct command execution w/ stdout pass through
-    (X) [Dec 10] Scrolling window
-    (X) [Dec 10] Basic unit test support in framework
+  12.18
+    (x) [18.12.2010] Basic parser scaffolding
+    (x) [18.12.2010] Test linking a second parser
+    (x) [18.12.2010] Connect to runtime
+    (X) [13.12.2010] Basic unit test support in framework
+    (X) [11.12.2010] Scrolling window
+    (X) [11.12.2010] Correct command execution w/ stdout pass through
+    (X) [11.12.2010] Experiment with ncurses display
+    (X) [10.12.2010] Assign environment variables (overwrite, append)
+    (X) [10.12.2010] Multiple commands per line
+    (X) [10.12.2010] Adopt & pass on environment
+    (X) [10.12.2010] Shell parser scaffolding

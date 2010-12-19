@@ -3,7 +3,7 @@
   char *text;
 };
 
-%token LEFT_PUSH WRITE
+%token LEFT_PUSH WRITE EOS
 %token <text> TERM
 
 %{
@@ -23,7 +23,7 @@
   void yyerror(char*);
   int  yylex(void);
 
-  void _prepare_statement();
+  void _process_statement(void);
 
   /* TODO: Make this a stack so we can recurse into ourself. */
   zn_statement *stmt;
@@ -40,15 +40,18 @@ program:
 
 statement:
        WRITE LEFT_PUSH TERM 
-           { stmt_add_call(stmt, dsp_get_write());
-	     stmt_add_arg(stmt, $3);
+           { stmt_add_handler(stmt, dsp_get_write(dsp));
+	     zn_param* p = param_new();
+	     param_set(p, $3);
+	     stmt_add_arg(stmt, p);
 	   }
      ;
 %%
 
 void 
 yyerror(char *err) {
-  display_err("ERROR: %s\n", err);
+  zn_output_func errout = dsp_get_err_writer(dsp);
+  errout("ERROR: %s\n", err);
 }
 
 void _process_statement()  {
@@ -68,6 +71,5 @@ parse_line(zn_statement *s, zn_dispatcher *d, const char *text) {
   if (result) {
     return zn_parse_failure;
   }
-  command_seq_reset(cmd_seq);
-  return zn_parse_success;
+  return zn_parse_successful;
 }

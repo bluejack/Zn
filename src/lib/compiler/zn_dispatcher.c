@@ -1,7 +1,11 @@
 #include "zn_dispatcher.h"
 
+#include <stdlib.h>
+#include <string.h>
+
 struct _dispatcher {
-  write_f write;
+  zn_output_func  errout;
+  zn_stmt_handler write;
 };
 
 zn_dispatcher* dispatcher_new() {
@@ -11,6 +15,19 @@ zn_dispatcher* dispatcher_new() {
   return dsp;
 }
 
-void dispatcher_reg_write(zn_dispatcher *dsp, write_f writer) {
+void dsp_reg_write(zn_dispatcher *dsp, zn_stmt_handler writer) {
   dsp->write = writer;
+}
+
+void dsp_reg_err_writer(zn_dispatcher *dsp, zn_output_func out) {
+  dsp->errout = out;
+}
+
+zn_stmt_handler dsp_get_write(zn_dispatcher *dsp) {
+  return dsp->write;
+}
+
+zn_output_func 
+dsp_get_err_writer(zn_dispatcher *dsp) {
+  return dsp->errout;
 }

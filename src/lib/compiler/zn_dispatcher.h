@@ -6,21 +6,31 @@
 ** table.
 */
 
-typedef struct _dispatcher zn_parser;
+typedef struct _dispatcher zn_dispatcher;
 
+#include "zinc/zn_statement.h"
 
-#include "zn_statement.h"
+typedef void(*zn_output_func)(const char*, ...);
 
 /*
 ** Basic methods
 */
 
-zn_dispatcher *dispatcher_new();
+zn_dispatcher*
+dispatcher_new(void);
 
 /*
 ** Registration methods.
 */
-void dispatcher_reg_write(zn_stmt_handler);
+void dsp_reg_write(zn_dispatcher*, zn_stmt_handler);
+void dsp_reg_err_writer(zn_dispatcher*, zn_output_func);
+
+/*
+** Accessors
+*/
+
+zn_stmt_handler dsp_get_write(zn_dispatcher*);
+zn_output_func  dsp_get_err_writer(zn_dispatcher*);
 
 
 #endif

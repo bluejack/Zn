@@ -7,12 +7,15 @@
 #include "view.h"
 #include "shell_kernel.h"
 
+#include "zinc/runtime.h"
+
 #define LINE_BUFFER_LEN FILENAME_MAX * 4
 
 void
 run_shell(char **env_list)
 {
   initialize_shell(env_list);
+  initialize_runtime(&display_err, &display_text);
 
   char line_buffer[LINE_BUFFER_LEN];
 
