@@ -1,5 +1,7 @@
 #ifndef ZINC_SHELL
 #define ZINC_SHELL
+/* TODO: Literify. */
+
 /*
 ** Zinc Shell
 **
@@ -10,4 +12,5 @@
 
 void run_shell(char **environ);
 
+/* TODO: Quotify. */
 #endif

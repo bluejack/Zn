@@ -1,7 +1,7 @@
                            ~ zinc language compiler ~
                                      v0.02          
 
----                 Copyright (c) 2006-2011, Blunt Jackson                   ---
+---                 Copyright (c) 2010-2011, Blunt Jackson                   ---
 
 Welcome. The zinc project is a personal effort at language design and a learning
 experience in compiler construction and extensible runtime development. The zinc
@@ -13,6 +13,8 @@ sophy "Task Oriented Application Design," or TOAD.
 
 Deeper discussion of the theory and practice of TOAD is reserved for such a time
 as this language demonstrates any value in the approach.
+
+:   Want to read the code? Follow the trail: Begin with src/apps/zinc/zinc.c   :
 
 --------------------------------------------------------------------------------
 
@@ -40,7 +42,7 @@ $ zinc -c file.zn <-- Compile file.zn to application 'file'
 
 Shell:
 
-     ( ) [Dec 10] Connect to Zinc runtime
+>>>  ( ) [Dec 10] Connect to Zinc runtime
      ( ) [Dec 10] Detach from shell command
      ( ) [Dec 10] Command history
      ( ) [Dec 10] Research Termios/Termcap alternatives to ncurses
@@ -53,8 +55,8 @@ Shell:
 
 Runtime:
           
-     ( ) [Dec 10] Connect to shell display
-     ( ) [Dec 10] Hello World (interactive)
+>>>  ( ) [Dec 10] Connect to shell display
+>>>  ( ) [Dec 10] Hello World (interactive)
      ( ) [Dec 10] Basic state management
      (.) [Dec 10] Symbol table, first draft
          [x] Hash Table Primitive available!
@@ -71,7 +73,6 @@ Compiler:
 
 Completed
 
-  12.18
     (x) [18.12.2010] Basic parser scaffolding
     (x) [18.12.2010] Test linking a second parser
     (x) [18.12.2010] Connect to runtime

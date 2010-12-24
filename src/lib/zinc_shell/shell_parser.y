@@ -5,6 +5,7 @@
 
 %token EOS EXIT ENV ASSIGN
 %token <text> TERM
+%token <text> ZINCLINE
 
 %{
   #include <stdlib.h>
@@ -44,6 +45,10 @@ statement:
                            command_add_arg(current, $1);
 	                   command_add_arg(current, $3);
 	                   command_set_handler(current, &zinc_shell_assign);
+                         }
+     | ZINCLINE EOS      { 
+                           command_add_arg(current, $1);
+                           command_set_handler(current, &zinc_lang_line);
                          }
      | EXIT EOS          { command_set_handler(current, &zinc_shell_exit); }
      | ENV EOS           { command_set_handler(current, &zinc_shell_env);  }

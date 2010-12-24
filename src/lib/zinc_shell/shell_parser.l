@@ -23,6 +23,10 @@ void yyerror(char *);
 [\n;]+[ ;\n]*             return EOS;
 exit                      return EXIT;
 env                       return ENV;
+:[^\n]*                   {
+                            yylval.text = strdup(yytext+1);
+                            return ZINCLINE;
+                          }
 {TERMSTR}+                { 
                             yylval.text = strdup(yytext);
                             return TERM;

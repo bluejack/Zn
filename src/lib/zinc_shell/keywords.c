@@ -70,6 +70,13 @@ int zinc_shell_assign(command *cmd)
   return 0;
 }
 
+int zinc_lang_line(command *cmd)
+{
+  char* line = command_next_arg(cmd);
+  display_text("ZINC LANG: %s\n", line);
+  return 0;
+}
+
 #define INPUT_BUFFER 512
 
 /*

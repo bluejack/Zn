@@ -13,4 +13,6 @@ int zinc_shell_env(command*);
 
 int zinc_shell_assign(command*);
 
+int zinc_lang_line(command*);
+
 #endif
