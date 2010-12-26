@@ -19,11 +19,12 @@
   
    But for now, it is only a shell.
 
+   Further reading:
+
+   * http://github.com/bluejack/zinc/blob/master/src/lib/shell/shell.h
+
 \*----------------------------------------------------------------------------*/
 
-/*
-** Further reading:
-*/
 #include "zinc/shell.h"
 
 /*

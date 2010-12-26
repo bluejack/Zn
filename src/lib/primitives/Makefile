@@ -14,7 +14,7 @@ PUBLIC_HEADERS =      \
 	zn_list.h     \
 	zn_hash.h     \
 	zn_mem.h      \
-	zn_defines.h  \
+	defines.h  \
 	$(NULL)
 
 TEST_SOURCES = \

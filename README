@@ -14,8 +14,8 @@ sophy "Task Oriented Application Design," or TOAD.
 Deeper discussion of the theory and practice of TOAD is reserved for such a time
 as this language demonstrates any value in the approach.
 
-:   Want to read the code? Follow the trail: Begin with src/apps/zinc/zinc.c   :
-:    TEST: http://github.com/bluejack/zinc/blob/master/src/apps/zinc/zinc.c    :
+:  Want to read the code? Follow the trail. Begin at the beginning, with main  :
+:       http://github.com/bluejack/zinc/blob/master/src/apps/zinc/zinc.c       :
 
 --------------------------------------------------------------------------------
 
