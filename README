@@ -22,11 +22,11 @@ as this language demonstrates any value in the approach.
 
 --------------------------------------------------------------------------------
 
-Overall:  Not Yet Functional
+Overall:  Skeleton functionality
 
 Shell:    Primitive command execution in place.
-Runtime:  Nuthin
-Compiler: Nuthin
+Runtime:  Skeleton with output only, interactive mode only
+Compiler: Skeleton with single keyword only, no actual compilation yet.
 
 Current:  Compiler->Basic Parser Scaffolding
 
