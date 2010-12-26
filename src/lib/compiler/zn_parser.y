@@ -15,13 +15,13 @@
   #include "zn_statement.h"
   #include "zn_dispatcher.h"
 
-  extern FILE* yyin;
-  extern int   yylineno;
-  extern int   yy_scan_string(const char *);
-  extern void  yylex_destroy();
+  extern FILE* znin;
+  extern int   znlineno;
+  extern int   zn_scan_string(const char *);
+  extern void  znlex_destroy();
 
-  void yyerror(char*);
-  int  yylex(void);
+  void znerror(char*);
+  int  znlex(void);
 
   void _process_statement(void);
 
@@ -49,27 +49,27 @@ statement:
 %%
 
 void 
-yyerror(char *err) {
+znerror(char *err) {
   zn_output_func errout = dsp_get_err_writer(dsp);
   errout("ERROR: %s\n", err);
 }
 
 void _process_statement()  {
   char* err = stmt_process(stmt);
-  if (err) yyerror(err);
+  if (err) znerror(err);
 }
 
-zn_parse_result
+zn_result
 parse_line(zn_statement *s, zn_dispatcher *d, const char *text) { 
 
   stmt = s;
   dsp  = d;
 
-  yy_scan_string(text);
-  int result = yyparse();
-  yylex_destroy();
+  zn_scan_string(text);
+  int result = znparse();
+  znlex_destroy();
   if (result) {
-    return zn_parse_failure;
+    return zn_failure;
   }
-  return zn_parse_successful;
+  return zn_success;
 }

@@ -6,6 +6,7 @@ ONLY_ARCHIVE = 1
 REQUIRE_C = 1
 
 LYOBJ = zn_parser
+PARSER_PREFIX = zn
 
 OBJECT_SOURCES =           \
 	zn_dispatcher.c    \

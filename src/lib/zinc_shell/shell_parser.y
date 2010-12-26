@@ -18,13 +18,13 @@
   #include "keywords.h"
   #include "view.h"
 
-  extern FILE* yyin;
-  extern int   yylineno;
-  extern int   yy_scan_string(const char *);
-  extern void  yylex_destroy();
+  extern FILE* shell_in;
+  extern int   shell_lineno;
+  extern int   shell__scan_string(const char *);
+  extern void  shell_lex_destroy();
 
-  void yyerror(char*);
-  int  yylex(void);
+  void shell_error(char*);
+  int  shell_lex(void);
   command_seq *cmd_seq;
   command     *current;
 
@@ -69,7 +69,7 @@ void _append_command(void) {
   current = command_new();
 }
 
-void yyerror(char *err) {
+void shell_error(char *err) {
   display_err("ERROR: %s\n", err);
 }
 
@@ -83,9 +83,9 @@ parse_command(const char* input) {
   }
   current = command_new();
 
-  yy_scan_string(input);
-  int result = yyparse();
-  yylex_destroy();
+  shell__scan_string(input);
+  int result = shell_parse();
+  shell_lex_destroy();
   if (result) {
     return NULL;
   }

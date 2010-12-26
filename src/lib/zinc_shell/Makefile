@@ -6,6 +6,7 @@ ONLY_ARCHIVE = 1
 REQUIRE_C = 1
 
 LYOBJ = shell_parser
+PARSER_PREFIX = shell_
 
 THIRD_PARTY_LIBS = -lncurses
 

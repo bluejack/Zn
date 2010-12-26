@@ -8,7 +8,7 @@ WORDSTART [A-Za-z_]
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-void yyerror(char *);
+void znerror(char *);
 
 #include "zn_parser.tab.h"
 #define YY_NO_INPUT
@@ -18,27 +18,27 @@ void yyerror(char *);
 
 %%
 write                     return WRITE;
-\<--                       return LEFT_PUSH;
+\<:                       return LEFT_PUSH;
 [ \t]*\n                  return EOS;
 \"[^"\n]*["\n]            {
-                            yylval.text = strdup(yytext+1);
-                            if (yylval.text[yyleng-2] != '"')
-                              yyerror("Improperly terminated string.");
+                            znlval.text = strdup(zntext+1);
+                            if (znlval.text[znleng-2] != '"')
+                              znerror("Improperly terminated string.");
                             else
-                              yylval.text[yyleng-2] = 0;
+                              znlval.text[znleng-2] = 0;
                             return TERM;
                           }
 '[^'\n]*['\n]             {
-                            yylval.text = strdup(yytext+1);
-                            if (yylval.text[yyleng-2] != '\'')
-                              yyerror("Improperly terminated string.");
+                            znlval.text = strdup(zntext+1);
+                            if (znlval.text[znleng-2] != '\'')
+                              znerror("Improperly terminated string.");
                             else
-                              yylval.text[yyleng-2] = 0;
+                              znlval.text[znleng-2] = 0;
                             return TERM;
                           }
 
 %%
 
-int yywrap(void) {
+int znwrap(void) {
   return 1;
 }

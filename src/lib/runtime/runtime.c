@@ -5,12 +5,14 @@
 #include <string.h>
 
 #include "zinc/zn_statement.h"
+#include "zinc/zn_parser.h"
 
 char* _rt_write(zn_statement *stmt);
 
 struct _runtime {
   zn_dispatcher *dsp;
   zn_output_func out;
+  zn_output_func err;
 };
 
 zinc_runtime *runtime;
@@ -22,6 +24,7 @@ initialize_runtime(zn_output_func errout, zn_output_func stdout) {
 
   runtime->dsp = dispatcher_new();
   runtime->out = stdout;
+  runtime->err = errout;
 
   dsp_reg_err_writer(runtime->dsp, errout);
   dsp_reg_write(runtime->dsp, &_rt_write);
@@ -29,12 +32,29 @@ initialize_runtime(zn_output_func errout, zn_output_func stdout) {
   return runtime;
 }
 
+/*
+ * Concern: we have the execution happening within the parser;
+ * what happens when we have an open block? I think we'll need to reshuffle
+ * this.
+ */
+
+zn_result
+runtime_exec_line(char* line) {
+  
+  zn_statement *stmt = stmt_new();
+  char *err;
+
+  return parse_line(stmt, runtime->dsp, line);
+}
+
 char* 
 _rt_write(zn_statement *stmt) {
   
+  stmt_reset(stmt);
   zn_param *p = stmt_next_param(stmt);
   const char* msg = (const char*)param_get(p);
   runtime->out(msg);
 
   return NULL;
 }
+

@@ -9,7 +9,7 @@ TERMSTR   [^ \t\n;|'"=]
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-void yyerror(char *);
+void shell_error(char *);
 
 #include "shell_parser.tab.h"
 #define YY_NO_INPUT
@@ -24,32 +24,32 @@ void yyerror(char *);
 exit                      return EXIT;
 env                       return ENV;
 :[^\n]*                   {
-                            yylval.text = strdup(yytext+1);
+                            shell_lval.text = strdup(shell_text+1);
                             return ZINCLINE;
                           }
 {TERMSTR}+                { 
-                            yylval.text = strdup(yytext);
+                            shell_lval.text = strdup(shell_text);
                             return TERM;
                           }
 \"[^"\n]*["\n]            {
-                            yylval.text = strdup(yytext+1);
-                            if (yylval.text[yyleng-2] != '"')
-                              yyerror("Improperly terminated string.");
+                            shell_lval.text = strdup(shell_text+1);
+                            if (shell_lval.text[shell_leng-2] != '"')
+                              shell_error("Improperly terminated string.");
                             else
-                              yylval.text[yyleng-2] = 0;
+                              shell_lval.text[shell_leng-2] = 0;
                             return TERM;
                           }
 '[^'\n]*['\n]             {
-                            yylval.text = strdup(yytext+1);
-                            if (yylval.text[yyleng-2] != '\'')
-                              yyerror("Improperly terminated string.");
+                            shell_lval.text = strdup(shell_text+1);
+                            if (shell_lval.text[shell_leng-2] != '\'')
+                              shell_error("Improperly terminated string.");
                             else
-                              yylval.text[yyleng-2] = 0;
+                              shell_lval.text[shell_leng-2] = 0;
                             return TERM;
                           }
 
 %%
 
-int yywrap(void) {
+int shell_wrap(void) {
   return 1;
 }

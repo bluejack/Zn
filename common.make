@@ -214,6 +214,11 @@ else
   D_FLAGS := $(D_FLAGS) -D NDEBUG 
 endif
 
+ifdef PARSER_PREFIX
+  FLEX_OPTS = -P$(PARSER_PREFIX)
+  YACC_OPTS = -p $(PARSER_PREFIX)
+endif
+
 # Need any additional common libraries?  -lc? -lz?
 STD_LIBS := -lc
 
@@ -395,14 +400,14 @@ endif
 %.lex.o : %.l
 	@echo
 	@printf "%-4s  %-76s" '...' '$@'
-	$(LEX) -o$(LYOBJ).lex.c $(LYOBJ).l
+	$(LEX) $(FLEX_OPTS) -o$(LYOBJ).lex.c $(LYOBJ).l
 	$(strip $(CC_EXEC) -c $(PREP_LINE)  $(LYOBJ).lex.c -o $(BUILD_DIR)/$@ )
 	
 
 %.tab.o : %.y
 	@echo
 	@printf "%-4s  %-76s" '...' '$@'
-	$(YACC) -d $(LYOBJ).y
+	$(YACC) $(YACC_OPTS) -d $(LYOBJ).y
 	$(strip $(CC_EXEC) -c $(PREP_LINE)  $(LYOBJ).tab.c -o $(BUILD_DIR)/$@ )
 
 

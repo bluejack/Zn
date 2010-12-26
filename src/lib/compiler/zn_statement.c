@@ -18,6 +18,12 @@ stmt_new() {
   return stmt;
 }
 
+void
+stmt_destroy(zn_statement* stmt) {
+  list_destroy(stmt->params);
+  free(stmt);
+}
+
 void 
 stmt_add_handler(zn_statement *stmt, zn_stmt_handler h) {
   stmt->handle = h;
@@ -25,6 +31,11 @@ stmt_add_handler(zn_statement *stmt, zn_stmt_handler h) {
 
 void stmt_add_arg(zn_statement *stmt, zn_param *param) {
   list_add(stmt->params, param);
+}
+
+void
+stmt_reset(zn_statement *stmt) {
+  list_reset(stmt->params);
 }
 
 zn_param* 

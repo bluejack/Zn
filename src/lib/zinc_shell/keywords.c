@@ -11,6 +11,7 @@
 #include "environment.h"
 #include "view.h"
 #include "shell_kernel.h"
+#include "zinc/runtime.h"
 
 #define MAX_ARG_LIST 256
 
@@ -73,7 +74,11 @@ int zinc_shell_assign(command *cmd)
 int zinc_lang_line(command *cmd)
 {
   char* line = command_next_arg(cmd);
-  display_text("ZINC LANG: %s\n", line);
+  runtime_exec_line(line);
+  /* TODO: 
+   *  - Handle syntax error.
+   *  - handle open block.
+   */
   return 0;
 }
 
