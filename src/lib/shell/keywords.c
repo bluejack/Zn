@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <string.h>
 
 #include "environment.h"
 #include "view.h"
@@ -97,6 +98,7 @@ int zinc_shell_exec(command *cmd)
   char* appname = command_next_arg(cmd);
   char  path_buffer[FILENAME_MAX];
   arglist[0] = appname;
+  bool wait_for_pid = true;
   
   if (*appname != '/') {
     appname = _find_file_in_path(path_buffer, appname);
@@ -106,61 +108,48 @@ int zinc_shell_exec(command *cmd)
     }
   }
 
-  int pipes[2];
   int c = 1;
-  if (pipe(pipes) == -1) {
-    display_err("Failed establishing communication to process.");
-    return 1;
-  }
 
   while (c < MAX_ARG_LIST) {
     char* arg = (char*)command_next_arg(cmd);
-    arglist[c++] = arg;
+    if (arg && strcmp(arg, "&") == 0) {
+      wait_for_pid = false;
+    } else {
+      arglist[c++] = arg;
+    }
     if (arg == NULL) break; /* break after writing null to term the list. */
   }
+
+  /* Special shell view should be suspended until shell resumes. */
+  close_view();
 
   switch(pid = fork()) {
   case -1:
     /* Fork failed! */
-    display_err("System error allocating an additional process.\n");
+    fprintf(stderr, "Failed to execute.\n");
     break;
   case 0: 
     /* Child process */
-    close(pipes[0]);
-    dup2(pipes[1], STDOUT_FILENO);
     status = execve(appname, arglist, zinc_env);
     /* If we got here, exec failed. TODO: Figure out why. */
-    display_err("Failed to execute %s, reason TBD\n", appname);
+    fprintf(stderr, "Failed to execute %s.\n", appname);
     exit(status);
   default:
     /* Parent */
-    close(pipes[1]);
-    FILE *stream = fdopen(pipes[0], "r");
-    char buffer[INPUT_BUFFER];
-    int i = 0, next;
-    while ( ( next = fgetc( stream ) ) != EOF ) {
-      buffer[i++] = next;
-      if (next == '\n' || c == INPUT_BUFFER - 1) {
-	buffer[i] = '\0';
-	display_text(buffer);
-	i = 0;
+    if (wait_for_pid) {
+      if (waitpid(pid, &status, 0) < 0) {
+	/* Wait for pid failed!! */
+	fprintf(stderr, "System error tracking process %s\n", appname);
       }
-    }
-    if (i > 0) {
-      buffer[i] = '\0';
-      display_text(buffer);
-    }
-    
-    close(pipes[0]);
-    
-    if (waitpid(pid, &status, 0) < 0) {
-      /* Wait for pid failed!! */
-      display_err("System error tracking process %s\n", appname);
+      if ( !WIFEXITED(status)) {      
+	fprintf(stderr, "Debug, system error -- exit failure?\n");
+      }
+    } else {
+      printf("Started Process %d\n", pid);
     }
 
-    if ( !WIFEXITED(status)) {      
-      display_err("Debug, system error -- exit failure?\n");
-    }
+    initialize_view();
+
   }
 
   return status;

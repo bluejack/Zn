@@ -78,7 +78,6 @@ void   display_text(const char* format, ...) {
   va_start(ap, format);
 
   vprintf(format, ap);
-  printf("\n");
   va_end(ap);
 }  
 
@@ -87,7 +86,6 @@ void   display_err(const char* format, ...) {
   va_start(ap, format);
 
   vfprintf(stderr, format, ap);
-  fprintf(stderr, "\n");
   va_end(ap);
 }
 

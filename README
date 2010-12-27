@@ -43,7 +43,6 @@ $ zinc -c file.zn <-- Compile file.zn to application 'file'
 
 Shell:
 
-     ( ) [Dec 10] Detach from shell command
      ( ) [Dec 10] Command history
      ( ) [Dec 10] Left/Right arrows, ctrl-a, ctrl-e
 
@@ -71,6 +70,7 @@ Compiler:
 
 Completed
 
+    (X) [26.12.2010] Detach from shell command
     (X) [26.12.2010] Replace ncurses w/ termios terminal access
     (X) [26.12.2010] Research Termios/Termcap alternatives to ncurses
     (X) [26.12.2010] Hello World (interactive)
