@@ -32,11 +32,8 @@ void initialize_shell(char **env) {
 }
 
 void exit_shell(int exit_val) {
-
   /* Shutdown UI */
-  clrtoeol();
-  refresh();
-  endwin();
+  close_view();
   
   /* Terminate application */
   exit(exit_val);

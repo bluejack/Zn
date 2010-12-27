@@ -43,10 +43,10 @@ $ zinc -c file.zn <-- Compile file.zn to application 'file'
 
 Shell:
 
-     ( ) [Dec 10] Research Termios/Termcap alternatives to ncurses
      ( ) [Dec 10] Detach from shell command
      ( ) [Dec 10] Command history
      ( ) [Dec 10] Left/Right arrows, ctrl-a, ctrl-e
+
      ( ) [Jan 11] Input to child processes
      ( ) [Jan 11] Wildcard expansion
      ( ) [Feb 11] User identification & permissions management
@@ -55,8 +55,8 @@ Shell:
 
 Runtime:
           
-     ( ) [Dec 10] Basic state management
-     (.) [Dec 10] Symbol table, first draft
+     ( ) [Jan 11] Basic state management
+     (.) [Jan 11] Symbol table, first draft
          [x] Hash Table Primitive available!
      ( ) [Jan 11] Establish standalone mode for file interpretation
      ( ) [Jan 11] Hello World (standalone)
@@ -71,6 +71,8 @@ Compiler:
 
 Completed
 
+    (X) [26.12.2010] Replace ncurses w/ termios terminal access
+    (X) [26.12.2010] Research Termios/Termcap alternatives to ncurses
     (X) [26.12.2010] Hello World (interactive)
     (X) [26.12.2010] Connect to shell display
     (X) [26.12.2010] Connect to Zinc runtime
