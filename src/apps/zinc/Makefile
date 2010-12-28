@@ -8,7 +8,7 @@ LOCAL_LIBS :=        \
 	-lruntime    \
 	-lcompiler   \
 	-lprimitives \
-	-lncurses    \
+	-lreadline   \
 	$(NULL)
 
 include ../../../common.make

@@ -7,8 +7,6 @@ void initialize_view(void);
 
 void close_view(void);
 
-void display_prompt(void);
-
 size_t fetch_line(char* buffer, size_t buffer_len);
 
 void   printline(const char* output);

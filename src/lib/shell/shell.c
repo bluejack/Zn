@@ -21,7 +21,6 @@ run_shell(char **env_list)
 
   while(1) {
 
-    display_prompt();
     size_t len = fetch_line(line_buffer, LINE_BUFFER_LEN);
 
     if (len > 0) {

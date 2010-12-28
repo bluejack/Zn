@@ -43,9 +43,6 @@ $ zinc -c file.zn <-- Compile file.zn to application 'file'
 
 Shell:
 
-     ( ) [Dec 10] Command history
-     ( ) [Dec 10] Left/Right arrows, ctrl-a, ctrl-e
-
      ( ) [Jan 11] Input to child processes
      ( ) [Jan 11] Wildcard expansion
      ( ) [Feb 11] User identification & permissions management
@@ -70,6 +67,8 @@ Compiler:
 
 Completed
 
+    (X) [26.12.2010] Command history
+    (X) [26.12.2010] Left/Right arrows, ctrl-a, ctrl-e
     (X) [26.12.2010] Detach from shell command
     (X) [26.12.2010] Replace ncurses w/ termios terminal access
     (X) [26.12.2010] Research Termios/Termcap alternatives to ncurses
