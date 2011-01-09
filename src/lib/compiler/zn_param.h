@@ -1,5 +1,5 @@
-#ifndef ZINC_PARAMETER
-#define ZINC_PARAMETER
+#ifndef ZN_PARAMETER
+#define ZN_PARAMETER
 
 typedef struct _param zn_param;
 

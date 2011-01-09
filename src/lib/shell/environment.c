@@ -12,7 +12,7 @@
 
 #define MAX_ENV_SETTINGS 256
 
-char** zinc_env = NULL;
+char** zn_env = NULL;
 
 /* Private methods */
 char* _get_entry(const char* name, int* pos);
@@ -21,25 +21,25 @@ int   _put_entry(char* name, char* val);
 /* Public mothod implementations */
 
 int
-zinc_create_env(char** initenv)
+zn_create_env(char** initenv)
 {
   int c = 0;
-  if (zinc_env == NULL) {
-    zinc_env = calloc(MAX_ENV_SETTINGS, sizeof(char*));
+  if (zn_env == NULL) {
+    zn_env = calloc(MAX_ENV_SETTINGS, sizeof(char*));
   }
   while(initenv[c] && c < MAX_ENV_SETTINGS) {
-    zinc_env[c] = malloc(strlen(initenv[c]) + 1);
-    strcpy(zinc_env[c], initenv[c]);
+    zn_env[c] = malloc(strlen(initenv[c]) + 1);
+    strcpy(zn_env[c], initenv[c]);
     c++;
   }
   if (c < MAX_ENV_SETTINGS) {
-    zinc_env[c] = NULL;
+    zn_env[c] = NULL;
   }
   return c;
 }
 
 const char*
-zinc_getenv(const char* name)
+zn_getenv(const char* name)
 {
   assert(name != NULL);
   int pos = 0;
@@ -49,7 +49,7 @@ zinc_getenv(const char* name)
 }
 
 int
-zinc_putenv(const char* string) 
+zn_putenv(const char* string) 
 {
   char* key = strdup(string);
   char* val = key;
@@ -62,7 +62,7 @@ zinc_putenv(const char* string)
   *val = '\0';
   val++;
 
-  int retval = zinc_setenv(key, val, 1);
+  int retval = zn_setenv(key, val, 1);
   
   free(key);
   return retval;
@@ -70,9 +70,9 @@ zinc_putenv(const char* string)
 }
 
 int
-zinc_setenv(const char* name, const char* val, int overwrite)
+zn_setenv(const char* name, const char* val, int overwrite)
 {
-  if (!overwrite && zinc_getenv(name)) {
+  if (!overwrite && zn_getenv(name)) {
     return 1;
   }
 
@@ -84,10 +84,10 @@ zinc_setenv(const char* name, const char* val, int overwrite)
   char* old = _get_entry(name, &pos);
   if (old) {
     free(old);
-    zinc_env[pos] = entry;
+    zn_env[pos] = entry;
   } else if (pos < MAX_ENV_SETTINGS - 2) {
-    zinc_env[pos++] = entry;
-    zinc_env[pos] = NULL;
+    zn_env[pos++] = entry;
+    zn_env[pos] = NULL;
   } else {
     display_err("No more room in environment.\n");
     return 1;
@@ -97,7 +97,7 @@ zinc_setenv(const char* name, const char* val, int overwrite)
 }
 
 int
-zinc_unsetenv(const char* name)
+zn_unsetenv(const char* name)
 {
   /* Implementation TBD */
   (void)name;
@@ -107,10 +107,10 @@ zinc_unsetenv(const char* name)
 char* _get_entry(const char* name, int *pos) {
   *pos = 0;
   int len = strlen(name);
-  while(zinc_env[*pos] != NULL) {
-    if (strncmp(name, zinc_env[*pos], len) == 0 
-	&& zinc_env[*pos][len] == '=') {
-      return zinc_env[*pos];
+  while(zn_env[*pos] != NULL) {
+    if (strncmp(name, zn_env[*pos], len) == 0 
+	&& zn_env[*pos][len] == '=') {
+      return zn_env[*pos];
     }
     (*pos)++;
   }

@@ -13,17 +13,17 @@
 
 typedef struct _shell {
   int last_exit;
-} zinc_shell;
+} zn_shell;
 
-zinc_shell shell;
+zn_shell shell;
 
 void initialize_shell(char **env) {
 
   /* Set up state. */
-  memset(&shell, 0, sizeof(zinc_shell));
+  memset(&shell, 0, sizeof(zn_shell));
 
   /* Merge parent environment */
-  zinc_create_env(env);
+  zn_create_env(env);
 
   /* TODO: Handle configuration */
 

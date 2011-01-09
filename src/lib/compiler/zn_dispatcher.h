@@ -1,5 +1,5 @@
-#ifndef ZINC_DISPATCHER
-#define ZINC_DISPATCHER
+#ifndef ZN_DISPATCHER
+#define ZN_DISPATCHER
 /*
 ** The dispatcher is a provisional construct to allow dispatching of basic
 ** keywords; I expect this will be replaced by a more appropriate symbol
@@ -8,7 +8,7 @@
 
 typedef struct _dispatcher zn_dispatcher;
 
-#include "zinc/zn_statement.h"
+#include "zn/zn_statement.h"
 
 typedef void(*zn_output_func)(const char*, ...);
 

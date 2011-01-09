@@ -1,21 +1,21 @@
-#ifndef ZINC_ENVIRONMENT
-#define ZINC_ENVIRONMENT
+#ifndef ZN_ENVIRONMENT
+#define ZN_ENVIRONMENT
 
-extern char** zinc_env;
+extern char** zn_env;
 
 int
-zinc_create_env(char** initenv);
+zn_create_env(char** initenv);
 
 const char*
-zinc_getenv(const char* name);
+zn_getenv(const char* name);
 
 int
-zinc_putenv(const char* string);
+zn_putenv(const char* string);
 
 int
-zinc_setenv(const char* name, const char* val, int overwrite);
+zn_setenv(const char* name, const char* val, int overwrite);
 
 int
-zinc_unsetenv(const char* name);
+zn_unsetenv(const char* name);
 
 #endif

@@ -12,7 +12,7 @@
 #include "environment.h"
 #include "view.h"
 #include "shell_kernel.h"
-#include "zinc/runtime.h"
+#include "zn/runtime.h"
 
 #define MAX_ARG_LIST 256
 
@@ -30,7 +30,7 @@ char* _find_file_in_path(char* buffer, char* filename);
 **
 \* -------------------------------------------------------------------------- */
 
-int zinc_shell_exit(command *cmd)
+int zn_shell_exit(command *cmd)
 {
   int retval = 0;
   const char* exitval = command_next_arg(cmd);
@@ -41,7 +41,7 @@ int zinc_shell_exit(command *cmd)
   return retval; /* Never get here, I should hope! */
 }
 
-int zinc_shell_echo(command *cmd)
+int zn_shell_echo(command *cmd)
 {
   int retval = 0;
   const char* output = command_next_arg(cmd);
@@ -53,10 +53,10 @@ int zinc_shell_echo(command *cmd)
   return retval;
 }
 
-int zinc_shell_env(command *cmd)
+int zn_shell_env(command *cmd)
 {
   (void) cmd;
-  char** envout = zinc_env;
+  char** envout = zn_env;
   while(*envout) {
     printline(*envout);
     envout++;
@@ -64,15 +64,15 @@ int zinc_shell_env(command *cmd)
   return 0;
 }
 
-int zinc_shell_assign(command *cmd)
+int zn_shell_assign(command *cmd)
 {
   char* key = command_next_arg(cmd);
   char* val = command_next_arg(cmd);
-  zinc_setenv(key, val, true);
+  zn_setenv(key, val, true);
   return 0;
 }
 
-int zinc_lang_line(command *cmd)
+int zn_lang_line(command *cmd)
 {
   char* line = command_next_arg(cmd);
   runtime_exec_line(line);
@@ -90,7 +90,7 @@ int zinc_lang_line(command *cmd)
 **       Right now children are read only.
 */
 
-int zinc_shell_exec(command *cmd)
+int zn_shell_exec(command *cmd)
 {
   pid_t pid;
   int status = 0;
@@ -130,7 +130,7 @@ int zinc_shell_exec(command *cmd)
     break;
   case 0: 
     /* Child process */
-    status = execve(appname, arglist, zinc_env);
+    status = execve(appname, arglist, zn_env);
     /* If we got here, exec failed. TODO: Figure out why. */
     fprintf(stderr, "Failed to execute %s.\n", appname);
     exit(status);
@@ -166,7 +166,7 @@ _find_file_in_path(char *buffer, char *filename) {
 
   int c = 0;
   int i = 0;
-  const char* path = zinc_getenv("PATH");
+  const char* path = zn_getenv("PATH");
   
   /* move pointer to first char after = sign */
   while (*path != '\0') {

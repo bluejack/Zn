@@ -1,5 +1,5 @@
-#ifndef ZINC_COMMAND_SEQUENCE
-#define ZINC_COMMAND_SEQUENCE
+#ifndef ZN_COMMAND_SEQUENCE
+#define ZN_COMMAND_SEQUENCE
 
 /*---------------------------------------------------------------------------*\
 ** Command Sequence
@@ -15,7 +15,7 @@
 #include <stdbool.h>
 
 #include "command.h"
-#include "zinc/zn_list.h"
+#include "zn/zn_list.h"
 
 /*\
  * Opaque Type

@@ -1,7 +1,7 @@
 
 COMPILE_MODE := app
 
-APP_SOURCES := zinc.c
+APP_SOURCES := zn.c
 
 LOCAL_LIBS :=        \
 	-lshell      \

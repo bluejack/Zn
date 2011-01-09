@@ -1,7 +1,7 @@
-#ifndef ZINC_STATEMENT
-#define ZINC_STATEMENT
+#ifndef ZN_STATEMENT
+#define ZN_STATEMENT
 
-#include "zinc/zn_param.h"
+#include "zn/zn_param.h"
 
 typedef struct _stmt zn_statement;
 

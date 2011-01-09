@@ -1,5 +1,5 @@
-#ifndef ZINC_SHELL_KERNEL
-#define ZINC_SHELL_KERNEL
+#ifndef ZN_SHELL_KERNEL
+#define ZN_SHELL_KERNEL
 
 /*
 ** Note this is a stateful API -- only one shell is expected to be running per

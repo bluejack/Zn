@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "zinc/zn_list.h"
+#include "zn/zn_list.h"
 
 struct _stmt {
   zn_stmt_handler handle;

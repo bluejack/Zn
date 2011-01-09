@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "zinc/zn_statement.h"
-#include "zinc/zn_parser.h"
+#include "zn/zn_statement.h"
+#include "zn/zn_parser.h"
 
 char* _rt_write(zn_statement *stmt);
 
@@ -15,9 +15,9 @@ struct _runtime {
   zn_output_func err;
 };
 
-zinc_runtime *runtime;
+zn_runtime *runtime;
 
-zinc_runtime*
+zn_runtime*
 initialize_runtime(zn_output_func errout, zn_output_func stdout) {
   runtime = malloc(sizeof(runtime));
   memset(runtime, 0, sizeof(runtime));
@@ -42,7 +42,6 @@ zn_result
 runtime_exec_line(char* line) {
   
   zn_statement *stmt = stmt_new();
-  char *err;
 
   return parse_line(stmt, runtime->dsp, line);
 }

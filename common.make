@@ -15,10 +15,10 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
 # ------------------------------------ #
-#  (0) Zinc specific globals           #
+#  (0) Zn specific globals             #
 # ------------------------------------ #
 
-NAMESPACE := zinc
+NAMESPACE := zn
 C_STD     := gnu99
 # MULTIPROJECT := 1 not for zinc!
 APPLE_LINK := -flat_namespace

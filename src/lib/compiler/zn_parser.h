@@ -1,9 +1,9 @@
-#ifndef ZINC_PARSER
-#define ZINC_PARSER
+#ifndef ZN_PARSER
+#define ZN_PARSER
 
 #include "zn_statement.h"
 #include "zn_dispatcher.h"
-#include "zinc/defines.h"
+#include "zn/defines.h"
 
 /*
 ** Given a statement object and a valid dispatcher, this will

@@ -1,5 +1,5 @@
-#ifndef ZINC_DEFINES
-#define ZINC_DEFINES
+#ifndef ZN_DEFINES
+#define ZN_DEFINES
 
 typedef enum {
   zn_success = 0,

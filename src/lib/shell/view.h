@@ -1,5 +1,5 @@
-#ifndef ZINC_SHELL_VIEW
-#define ZINC_SHELL_VIEW
+#ifndef ZN_SHELL_VIEW
+#define ZN_SHELL_VIEW
 
 #include <stdlib.h>
 

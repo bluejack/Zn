@@ -1,18 +1,18 @@
-#ifndef ZINC_SHELL_KEYWORDS
-#define ZINC_SHELL_KEYWORDS
+#ifndef ZN_SHELL_KEYWORDS
+#define ZN_SHELL_KEYWORDS
 
 #include "command.h"
 
-int zinc_shell_exit(command*);
+int zn_shell_exit(command*);
 
-int zinc_shell_echo(command*);
+int zn_shell_echo(command*);
 
-int zinc_shell_exec(command*);
+int zn_shell_exec(command*);
 
-int zinc_shell_env(command*);
+int zn_shell_env(command*);
 
-int zinc_shell_assign(command*);
+int zn_shell_assign(command*);
 
-int zinc_lang_line(command*);
+int zn_lang_line(command*);
 
 #endif

@@ -1,30 +1,26 @@
-#ifndef ZINC_SHELL
-#define ZINC_SHELL
+#ifndef ZN_SHELL
+#define ZN_SHELL
 /*----------------------------------------------------------------------------*\
-                                 The Zinc Shell
+                                  The Zn Shell
   
-   The zinc shell begins with the philosophy that an interactive interpretter
-   is more convenient and useful if it also has access to the file system. By
-   access, of course, we mean that it can do all the usual things that people
-   use a modern shell for. The zinc shell has no ambition to compete with zsh
-   or bash, but only to ensure that a developer working in zinc can navigate,
-   explore, and interact with the file system as well as with all the runtime
-   resources. 
+   The Zn shell begins with the philosophy that an interactive console should
+   be as close to a fully functional shell as possible. While the Zn shell is
+   not intended to compete with zsh, bash or the like, it does hope that when
+   a developer working in Zn needs navigate and interact with the file system
+   as well as with all the runtime resources, there is no inconvenience.
 
    The shell has three basic operations:
 
      1. Execute filesystem shell operations. These are not pass-throughs to a
-        parent shell; the zinc shell *can* be used as a full unix shell.
+        parent shell; the Zn shell *can* be used as a full unix shell.
 
-     2. Execute global zinc code. Any statement entered has global scope, and
-        all variables declared with persist for the life of the session. Each
-        statement is executed as it is entered.
+     2. Execute global and scoped Zn code. Valid Zn statements entered in the
+        console will have immediate global scope, while all objects and tasks
+        have the appropriate scope declared. Zn files may be loaded directly,
+        or referenced as from any Zn script. 
 
-     3. Enter scoped or block level code. Opening a block of any sort whether
-        it be a loop, an object, or a task will convert to line editing mode.
-        The user will be prompted for additional lines of zinc code until the
-        block is complete. (There will be controls to exit this mode and also
-        to return to it. TBD!)
+     3. Inspect the interactive runtime. All active and available objects and
+        tasks may be inspected from the console.
 
    There's not much interface here: when the shell is running, it is the root
    of the whole application.

@@ -11,7 +11,7 @@
   #include <stdlib.h>
   #include <stdio.h>
   #include <stdbool.h>
-  #include "zinc/shell.h"
+  #include "zn/shell.h"
   #include "shell_parser.h"
   #include "command.h"
   #include "command_sequence.h"
@@ -40,18 +40,18 @@ program:
      ;
 
 statement:
-       termlist EOS      { command_set_handler(current, &zinc_shell_exec); }
+       termlist EOS      { command_set_handler(current, &zn_shell_exec); }
      | TERM ASSIGN TERM EOS { 
                            command_add_arg(current, $1);
 	                   command_add_arg(current, $3);
-	                   command_set_handler(current, &zinc_shell_assign);
+	                   command_set_handler(current, &zn_shell_assign);
                          }
      | ZINCLINE EOS      { 
                            command_add_arg(current, $1);
-                           command_set_handler(current, &zinc_lang_line);
+                           command_set_handler(current, &zn_lang_line);
                          }
-     | EXIT EOS          { command_set_handler(current, &zinc_shell_exit); }
-     | ENV EOS           { command_set_handler(current, &zinc_shell_env);  }
+     | EXIT EOS          { command_set_handler(current, &zn_shell_exit); }
+     | ENV EOS           { command_set_handler(current, &zn_shell_env);  }
      ;
 
 termlist:

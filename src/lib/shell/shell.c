@@ -7,7 +7,7 @@
 #include "view.h"
 #include "shell_kernel.h"
 
-#include "zinc/runtime.h"
+#include "zn/runtime.h"
 
 #define LINE_BUFFER_LEN FILENAME_MAX * 4
 

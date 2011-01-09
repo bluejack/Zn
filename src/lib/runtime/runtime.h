@@ -1,12 +1,12 @@
-#ifndef ZINC_RUNTIME
-#define ZINC_RUNTIME
+#ifndef ZN_RUNTIME
+#define ZN_RUNTIME
 
-#include "zinc/zn_dispatcher.h"
-#include "zinc/defines.h"
+#include "zn/zn_dispatcher.h"
+#include "zn/defines.h"
 
-typedef struct _runtime zinc_runtime;
+typedef struct _runtime zn_runtime;
 
-zinc_runtime*
+zn_runtime*
 initialize_runtime(zn_output_func errout, zn_output_func stdout);
 
 zn_result

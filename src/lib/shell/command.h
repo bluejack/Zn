@@ -1,5 +1,5 @@
-#ifndef ZINC_COMMAND
-#define ZINC_COMMAND
+#ifndef ZN_COMMAND
+#define ZN_COMMAND
 
 #include <stdbool.h>
 
