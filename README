@@ -1,21 +1,18 @@
-                           ~ zinc language compiler ~
+                              ~ The Zn Language ~
                                      v0.02          
 
 ---                 Copyright (c) 2010-2011, Blunt Jackson                   ---
 
-Welcome. The zinc project is a personal effort at language design and a learning
-experience in compiler construction and extensible runtime development. The zinc
-language is intended to apply some of the efficiencies erlang brings to parallel
-processing to a pragmatic imperative language that offers first-class objects as
-well as some new constructs designed to encourage clean application design while
-solving the every-day problems of the real world. I call this development philo-
-sophy "Task Oriented Application Design," or TOAD.
-
-Deeper discussion of the theory and practice of TOAD is reserved for such a time
-as this language demonstrates any value in the approach.
+Welcome. Zn is a personal effort at language design and a learning experience in
+compiler construction and extensible runtime development. Zn (pronounces 'zinc')
+is intended to support Task Oriented Application Development (TOAD): Objects and
+Tasks are both first class language structures. While Zn is a pragmatic language
+in the imperative style, it draws inspiration from Erlang in attempting to bring
+simple, intuitive, robust, and efficient solutions to parallel processing by the
+use of a message-passing architecture and immutable shared objects.
 
 :  Want to read the code? Follow the trail. Begin at the beginning, with main  :
-:       http://github.com/bluejack/zinc/blob/master/src/apps/zinc/zinc.c       :
+:          http://github.com/bluejack/zn/blob/master/src/apps/zn/zn.c          :
 
 --------------------------------------------------------------------------------
 
@@ -35,9 +32,9 @@ Current:  Compiler->Basic Parser Scaffolding
 
 Usage:
 
-$ zinc            <-- Shell Mode
-$ zinc file.zn    <-- Interpret and execute file.zn
-$ zinc -c file.zn <-- Compile file.zn to application 'file'
+$ zn            <-- Shell Mode
+$ zn file.zn    <-- Interpret and execute file.zn
+$ zn -c file.zn <-- Compile file.zn to application 'file'
 
 --------------------------------------------------------------------------------
 
@@ -74,7 +71,7 @@ Completed
     (X) [26.12.2010] Research Termios/Termcap alternatives to ncurses
     (X) [26.12.2010] Hello World (interactive)
     (X) [26.12.2010] Connect to shell display
-    (X) [26.12.2010] Connect to Zinc runtime
+    (X) [26.12.2010] Connect to Zn runtime
     (x) [18.12.2010] Basic parser scaffolding
     (x) [18.12.2010] Test linking a second parser
     (x) [18.12.2010] Connect to runtime
