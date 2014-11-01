@@ -1,7 +1,7 @@
                               ~ The Zn Language ~
                                      v0.02          
 
----                 Copyright (c) 2010-2011, Blunt Jackson                   ---
+---                 Copyright (c) 2010-2014, Blunt Jackson                   ---
 
 Welcome. Zn is a personal effort at language design and a learning experience in
 compiler construction and extensible runtime development. Zn (pronounces 'zinc')
@@ -40,22 +40,22 @@ $ zn -c file.zn <-- Compile file.zn to application 'file'
 
 Shell:
 
-     ( ) [Jan 11] Input to child processes
-     ( ) [Jan 11] Wildcard expansion
-     ( ) [Feb 11] User identification & permissions management
-     ( ) [Feb 11] Chaining programs
-     ( ) [Feb 11] Redirecting stdin/stdout
+     ( ) Input to child processes
+     ( ) Wildcard expansion
+     ( ) User identification & permissions management
+     ( ) Chaining programs
+     ( ) Redirecting stdin/stdout
 
 Runtime:
           
-     ( ) [Jan 11] Basic state management
-     (.) [Jan 11] Symbol table, first draft
+     ( ) Basic state management
+     (.) Symbol table, first draft
          [x] Hash Table Primitive available!
-     ( ) [Jan 11] Establish standalone mode for file interpretation
-     ( ) [Jan 11] Hello World (standalone)
+     ( ) Establish standalone mode for file interpretation
+     ( ) Hello World (standalone)
 
 Compiler:
-     ( ) [Feb 11] Hello world -> C
+     ( ) Hello world -> C
 
 --------------------------------------------------------------------------------
 : Plans are only good intentions unless they immediately degenerate into hard  :

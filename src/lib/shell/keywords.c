@@ -103,7 +103,7 @@ int zn_shell_exec(command *cmd)
   if (*appname != '/') {
     appname = _find_file_in_path(path_buffer, appname);
     if (!appname) {
-      display_err("%s not found", arglist[0]);
+      display_err("%s not found\n", arglist[0]);
       return -1;
     }
   }

@@ -19,8 +19,8 @@ zn_runtime *runtime;
 
 zn_runtime*
 initialize_runtime(zn_output_func errout, zn_output_func stdout) {
-  runtime = malloc(sizeof(runtime));
-  memset(runtime, 0, sizeof(runtime));
+  runtime = malloc(sizeof(zn_runtime));
+  memset(runtime, 0, sizeof(zn_runtime));
 
   runtime->dsp = dispatcher_new();
   runtime->out = stdout;
